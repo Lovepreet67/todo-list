@@ -1,5 +1,23 @@
 {% extends "todolist/layout.html" %}
-{% load static%}
 {%block body%}
-        <h1>welcome to the todo list</h1>
- {%endblock%}   
+{% if is_empty %}
+<h1>nothing to do</h1>
+{% else %}
+        <table>
+                <tr>
+                        <th>task</th>
+                        
+                        <th>time</th>
+                </tr>
+        
+                {% for y in data %}
+                <tr>
+                <td>{{ y.task_name }}</td>  
+                <td> {{ y.time  }}</td>
+
+                </tr>
+                {% endfor %}
+       
+        </table>
+{% endif %}
+ {% endblock %}   

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>login</title>
+        <link rel="stylesheet" href="{% static 'styles/base.css'% }">
+    </head>
+    <body>
+        <h1>yout are at login </h1>
+        {% if incorrect_password%}
+        <h1>incorrect username or password!</h1>
+        {% endif %}
+
+        <a href="{% url 'about'%}">about</a>
+        <form action="{% url 'loginx' %} " method="POST">
+            {% csrf_token %}
+        <input type="text"  name="username">
+        <input type="password" name="password">
+        <input type="submit" placeholder="login" value="login" >
+    </form>
+        <h1>don't have account </h1>
+        <a href="{% url 'signup' %}">signup</a>
+    </body>
+</html>

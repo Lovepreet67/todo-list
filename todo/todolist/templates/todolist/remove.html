@@ -1,0 +1,29 @@
+{% extends "todolist/layout.html"%}
+
+{% block body %}
+{% if is_empty %}
+  <h1>nothing to remove</h1>
+{% else  %}
+<form action="{% url 'remove'%}" method="POST">
+    {% csrf_token%}
+    <table>
+    <tr>
+        <th>task</th>
+        <th>time</th>
+        <th>check to remove</th>
+</tr>
+
+{% for a1 ,a2  in data  %}
+                <tr>
+                <td>{{ a1.task_name }}</td>  
+                <td> {{ a1.time  }}</td>
+                <td><input type="checkbox" name = {{a2}}></td>
+                </tr>
+                {% endfor %}
+
+</table>
+<input type="submit" name="" id="submit">
+</form>   
+{% endif %}
+    
+{% endblock %}
