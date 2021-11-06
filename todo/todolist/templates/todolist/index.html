@@ -1,23 +1,36 @@
 {% extends "todolist/layout.html" %}
-{%block body%}
-{% if is_empty %}
-<h1>nothing to do</h1>
-{% else %}
-        <table>
-                <tr>
-                        <th>task</th>
-                        
-                        <th>time</th>
-                </tr>
-        
-                {% for y in data %}
-                <tr>
-                <td>{{ y.task_name }}</td>  
-                <td> {{ y.time  }}</td>
+{%block body%} 
+<div class="index">
+        {% if is_empty %}
+        <div class="index_empty">
+                <h1 class="index_empty_text">nothing to do enjoy the day</h1>
+        </div>
+        {% else %}
+        <div class="index_not_empty">
+                <div class="index_not_empty_heading">
+                        <h1 class="index_not_empty_heading_text">
+                                Below given tasks are remaining for today 
+                        </h1>   
+                </div>
+                <table class="table">
+                        <tr class="table_row_heading">
+                                <th class="table_heading ">Task discription </th>
+                                <th class="table_heading ">Time</th>
+                        </tr>
+                        {% for y in data %}
+                        <tr class="table_row">
+                                <td class="table_data">{{ y.task_name }}</td>
+                                <td class="table_data"> {{ y.time  }}</td>
+                        </tr>
+                        {% endfor %}
 
-                </tr>
-                {% endfor %}
-       
-        </table>
-{% endif %}
- {% endblock %}   
+                </table>
+        </div>
+
+        {% endif %}
+</div>
+
+{% endblock %}
+
+
+<!--  django end     -->

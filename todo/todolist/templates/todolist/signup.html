@@ -1,24 +1,27 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>signup</title>
+{% extends "todolist/layout.html" %}
+{%block body%} 
+        <div class="signup_outer">
+            <div class="signup_heading">
+                <h1 >signup to enjoy incredible features </h1>
+            </div>
+            {% if invaliad_username%}
+            <div class="signup_error">
+                <h1>username already taken try other :(</h1>
+            </div>
+            {% endif %}
+            <div class="signup_form">
+                <form action="{% url 'signup' %}" method="POST">
+                    {% csrf_token %} 
+                        <input class="signup_form_input"  type="text" name="username" placeholder="Username" > 
+                        <input class="signup_form_input"  type="text" placeholder="first name" name="first_name">
+                        <input class="signup_form_input"  type="text" placeholder="last name " name="last_name">
+                        <input class="signup_form_input"  type="date" placeholder="date of birth" name="date_of_birth">
+                        <input class="signup_form_input"  type="email" placeholder="email id " name="email">
+                        <input  class="signup_form_input" type="password" placeholder="password"  name="password">
+                    
+                    <input class="signup_form_button" type="submit" value="sign up" >
+                </form>
+            </div>
+        </div>
         
-        <link rel="stylesheet" href="{% static 'styles/base.css'% }">
-    </head>
-    <body>
-        <h1>you are in sign up page </h1>
-        {% if invaliad_username%}
-        <h1>username already taken try other :(</h1>
-        {% endif %}
-        <form action="{% url 'signup' %}" method="POST">
-            {% csrf_token %} 
-            <input type="text" name="username" > 
-            <input type="text" placeholder="first name" name="first_name">
-            <input type="text" placeholder="last name " name="last_name">
-            <input type="date" placeholder="date of birth" name="date_of_birth">
-            <input type="email" placeholder="email id " name="email">
-            <input type="password" placeholder="password"  name="password">
-            <input type="submit" >
-        </form>
-    </body>
-</html>
+        {% endblock %}

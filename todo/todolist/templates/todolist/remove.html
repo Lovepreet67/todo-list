@@ -1,29 +1,36 @@
 {% extends "todolist/layout.html"%}
-
 {% block body %}
+<div class="remove">
 {% if is_empty %}
-  <h1>nothing to remove</h1>
-{% else  %}
-<form action="{% url 'remove'%}" method="POST">
-    {% csrf_token%}
-    <table>
-    <tr>
-        <th>task</th>
-        <th>time</th>
-        <th>check to remove</th>
-</tr>
+    <div class="remove_empty">
+      <h1 class="remove_empty_text">nothing to remove</h1>
+    </div>
+    {% else  %}
+    <div class="remove_form">
+      <form action="{% url 'remove'%}" method="POST">
+        {% csrf_token%}
+        <table class="table">
+          <tr class="table_row_heading">
+            <th class="table_heading">task</th>
+            <th class="table_heading">time</th>
+            <th class="table_heading">check to remove</th>
+          </tr>
 
-{% for a1 ,a2  in data  %}
-                <tr>
-                <td>{{ a1.task_name }}</td>  
-                <td> {{ a1.time  }}</td>
-                <td><input type="checkbox" name = {{a2}}></td>
-                </tr>
-                {% endfor %}
+          {% for a1 ,a2  in data  %}
+          <tr class="table_row">
+            <td class="table_data">{{ a1.task_name }}</td>
+            <td class="table_data"> {{ a1.time  }}</td>
+            <td class="table_data">
+              <input type="checkbox" name={{a2}} id={{a2}} class="checkbox">
+            </td>
+          </tr>
+          {% endfor %}
 
-</table>
-<input type="submit" name="" id="submit">
-</form>   
-{% endif %}
-    
+        </table>
+        <input type="submit" name="" id="submit" class="remove_submit" value="Remove">
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
 {% endblock %}

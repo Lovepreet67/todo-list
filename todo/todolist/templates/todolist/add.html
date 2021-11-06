@@ -1,11 +1,16 @@
 {% extends "todolist/layout.html" %}
 {%block body%}
-        <form action="{% url 'add' %}" method="POST">
-                {% csrf_token%}
-                <label for="task">task</label>
-                <input type="text" name = "task">
-                <label for="time">Time</label>
-                <input type="time" name = "time"  > 
-                <input type="submit">
-        </form>
+
+<div class="add">
+        <div class="add_form">
+                <form action="{% url 'add' %}" method="POST">
+                        {% csrf_token%}
+                        <label class="add_form_label"   for="task">task</label>
+                        <input class="add_form_input" type="text" name = "task" placeholder="Enter task">
+                        <label  class="add_form_label" for="time">Time</label>
+                        <input class="add_form_input" type="time" name = "time" > 
+                        <input class="add_form_submit" type="submit" value="Add">
+                </form>
+        </div>
+</div>     
  {%endblock%}   

@@ -1,23 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>login</title>
-        <link rel="stylesheet" href="{% static 'styles/base.css'% }">
-    </head>
-    <body>
-        <h1>yout are at login </h1>
-        {% if incorrect_password%}
-        <h1>incorrect username or password!</h1>
-        {% endif %}
+{% extends "todolist/layout.html" %}
+{%block body%}
 
-        <a href="{% url 'about'%}">about</a>
-        <form action="{% url 'loginx' %} " method="POST">
-            {% csrf_token %}
-        <input type="text"  name="username">
-        <input type="password" name="password">
-        <input type="submit" placeholder="login" value="login" >
-    </form>
-        <h1>don't have account </h1>
-        <a href="{% url 'signup' %}">signup</a>
-    </body>
-</html>
+    <div class="loginpage_outer">
+        <div class="login">
+            {% if incorrect_password%}
+            <div class="login_error">
+                <h1 class="login_error_text">incorrect username or password!</h1>
+            </div>
+            {% endif %}
+            <div class="login_form">
+                <form action="{% url 'loginx' %} " method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username" class="login_form_input">
+                    <input type="password" name="password" placeholder="Password" class="login_form_input">
+                    <input type="submit" placeholder="login" value="login" class="login_form_submit">
+                </form>
+            </div>
+        </div>
+        <div class="signup">
+            <h1 class="signup_text">don't have account </h1>
+            <div class="signup_button">
+                <a class="signup_button_text" href="{% url 'signup' %}" class="signup_button">signup</a>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

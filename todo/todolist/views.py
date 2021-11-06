@@ -7,6 +7,18 @@ from django.contrib.auth.decorators import login_required
 from .modelMan import check_user, delete_task,add_task ,save_user,list_of_tasks ,for_checkbox
 # Create your views here.
 
+@login_required
+def index(request): #not done ---->>
+    x = list_of_tasks(request.user.username)
+    is_empty = False
+    if len(x) == 0:
+        is_empty = True
+    return render(request, 'todolist/index.html', {
+        'data' : x,
+        'is_empty' : is_empty
+    })
+
+
 def loginx(request):  # login done 
     if(request.method == 'GET'):
         return render(request, 'todolist/login.html' ,{
@@ -19,7 +31,7 @@ def loginx(request):  # login done
         print(user)
         if user is not None:
             login(request, user)
-            return render(request, 'todolist/index.html')
+            return index(request)
         else:
             return render(request, 'todolist/login.html' ,{
                 'incorrect_password' : True
@@ -46,17 +58,6 @@ def signup(request): #done
             return render(request, 'todolist/signup.html', 
             {'invaliad_username' :True
             })
-
-@login_required
-def index(request): #not done ---->>
-    x = list_of_tasks(request.user.username)
-    is_empty = False
-    if len(x) == 0:
-        is_empty = True
-    return render(request, 'todolist/index.html', {
-        'data' : x,
-        'is_empty' : is_empty
-    })
 
 @login_required
 def add(request): #notdone
